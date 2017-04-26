@@ -13,3 +13,4 @@ sandbox
 test/out-fixtures/*
 test/output/
 test/watch-*.txt
+.vscode

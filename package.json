@@ -5,10 +5,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "bin" : {
-    "dudy" : "bin/dudy.js"
+  "bin": {
+    "dudy": "bin/dudy.js"
   },
-
   "author": "ramroll",
   "license": "MIT",
   "repository": {
@@ -19,5 +18,8 @@
     "url": "https://github.com/ramroll/dudy-cli/issues"
   },
   "homepage": "https://github.com/ramroll/dudy-cli#readme",
-  "description": ""
+  "description": "",
+  "dependencies": {
+    "command-line-args": "^4.0.3"
+  }
 }
