@@ -1,0 +1,15 @@
+.DS_Store
+*.log
+node_modules
+build
+*.node
+components
+coverage
+.coveralls.yml
+.nyc_output
+*.orig
+.idea
+sandbox
+test/out-fixtures/*
+test/output/
+test/watch-*.txt
