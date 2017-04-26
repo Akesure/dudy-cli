@@ -29,6 +29,7 @@ function usage() {
   console.log(`${FgYellow}%s`, 'usage:')
   console.log('  create [your-project-name]')
   console.log('  add    [webpack|gulp|babel|express|rollup|react|redux|jquery]')
+  console.log('type exit to exit')
   console.log(Reset)
 }
 
@@ -37,8 +38,8 @@ function error(messsage) {
 }
 
 
-
 function run() {
+
   const rl = readline.createInterface({
     input: process.stdin,
     output: process.stdout,
@@ -53,6 +54,7 @@ function run() {
       case 'hello':
         console.log('world!');
         break;
+      
       default:
         usage()
         break;
