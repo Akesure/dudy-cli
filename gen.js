@@ -6,7 +6,6 @@ class Gen {
     this.cmds = []
   }
 
-
   run(){
     
   }

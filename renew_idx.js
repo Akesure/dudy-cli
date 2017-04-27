@@ -1,6 +1,7 @@
 const fs = require('fs')
 const path = require('path')
 
+const {usage, prompt_usage, error} = require("./util")
 
 /**
  * 创建package.json的模板
@@ -35,11 +36,11 @@ function create_index(base, dir, create_pkg_json = false) {
   find_files_rec(dir)
 
 
+  const full_idx_file = path.resolve(base, dir, "index.js")
   // 创建package.json
   if(create_pkg_json) {
 
     const full_pgk_file = path.resolve(base, dir, "package.json")
-    const full_idx_file = path.resolve(base, dir, "index.js")
     fs.writeFileSync(full_pgk_file, tpl_pkg(dir))
 
   }
@@ -100,8 +101,9 @@ function create_index(base, dir, create_pkg_json = false) {
         })
       }
       else {
-        error("nothing to export in" + fullName)
-        throw 'unkown type in ' + fullName
+        error("nothing to export in file " + fullName)
+        return
+        //throw 'unkown type in ' + fullName
       }
       //lines.push(`  get ${moduleName}(){ return require("./${fullName}").default }, `)
 
@@ -118,6 +120,11 @@ ${lines.join("\n")}
 
 
 function renew_idx (dir) {
+
+  if(!dir.match(/src/)) {
+    error("You should specify a dir named src.")
+    return
+  }
   const files = fs.readdirSync(dir)
 
   const exceptions = ['node_modules', 'git', 'gitignore']
