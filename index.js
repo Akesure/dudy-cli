@@ -1,5 +1,9 @@
 #!/usr/bin/env node
 const readline = require("readline")
+const commandLineArgs = require("command-line-args")
+const renew_idx = require("./renew_idx")
+
+
 
 
 const Reset = "\x1b[0m"
@@ -25,7 +29,7 @@ const BgBlue = "\x1b[44m"
 const BgMagenta = "\x1b[45m"
 const BgCyan = "\x1b[46m"
 const BgWhite = "\x1b[47m"
-function usage() {
+function prompt_usage() {
   console.log(`${FgYellow}%s`, 'Greetings! Usage:')
   console.log('  create [your-project-name] [react-single-page-app]')
   console.log('  add    [sass]')
@@ -39,7 +43,7 @@ function error(messsage) {
 }
 
 
-function run() {
+function prompt() {
 
   const rl = readline.createInterface({
     input: process.stdin,
@@ -57,7 +61,7 @@ function run() {
         break;
       
       default:
-        usage()
+        prompt_usage()
         break;
     }
     rl.prompt();
@@ -67,6 +71,61 @@ function run() {
 
   });
 
+}
+
+
+function usage(){
+  console.log(`${FgBlue}`)
+  console.log('Dudy cli tools')
+  console.log(`${FgYellow}`)
+
+
+
+  console.log(`${FgBlue}`)
+  console.log('Synopsis')
+  console.log(`${FgYellow}`)
+
+  console.log('  dudy idx ./')
+  console.log('  dudy shell')
+
+  console.log('Options')
+
+  console.log('  --help(h), Display this usage guide')
+  console.log('  --index(i) [path], Generate es6 exports to index.js')
+  console.log('  --shell(s), open dudy shell')
+  console.log(Reset)
+}
+
+/**
+ * 程序入口
+ */
+function run(){
+
+  const optionDefinitions = [
+    { name: 'help', alias: 'h', type: Boolean, defaultOption : true},
+    { name: 'index', alias : 'i'},
+    { name: 'shell', alias: 's'}
+  ]
+
+  const options = commandLineArgs(optionDefinitions)
+
+  if(options.help) {
+    usage()
+  } 
+  else {
+    if(options.hasOwnProperty('shell')) {
+      prompt()
+    } else if(options.hasOwnProperty("index")) {
+
+      const dir = options.index
+      if(!dir) {
+        error('path is needed!')  
+        return
+      }
+      renew_idx(dir)
+
+    }
+  }
 }
 
 module.exports = run
