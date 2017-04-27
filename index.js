@@ -26,10 +26,11 @@ const BgMagenta = "\x1b[45m"
 const BgCyan = "\x1b[46m"
 const BgWhite = "\x1b[47m"
 function usage() {
-  console.log(`${FgYellow}%s`, 'usage:')
-  console.log('  create [your-project-name]')
-  console.log('  add    [webpack|gulp|babel|express|rollup|react|redux|jquery]')
-  console.log('type exit to exit')
+  console.log(`${FgYellow}%s`, 'Greetings! Usage:')
+  console.log('  create [your-project-name] [react-single-page-app]')
+  console.log('  add    [sass]')
+  console.log('')
+  console.log('  type "exit" to quit')
   console.log(Reset)
 }
 
