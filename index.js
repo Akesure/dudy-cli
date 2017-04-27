@@ -38,7 +38,7 @@ function prompt_usage() {
   console.log(Reset)
 }
 
-function error(messsage) {
+function error(message) {
   console.log(`${FgRed}%s${Reset}`, message)
 }
 

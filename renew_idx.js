@@ -14,20 +14,20 @@ const tpl_pkg = (pkgName) => {
 
 }
 
-function create_index(dir, create_pkg_json = false) {
+function create_index(base, dir, create_pkg_json = false) {
 
   const files = []
   function find_files_rec(_dir) {
-    const l = fs.readdirSync(path.resolve(__dirname, _dir))
+    const l = fs.readdirSync(path.resolve(base, _dir))
     l.forEach(file => {
-      if (fs.statSync(path.resolve(__dirname, _dir, file)).isDirectory()) {
+      if (fs.statSync(path.resolve(base, _dir, file)).isDirectory()) {
         find_files_rec(path.join(_dir, file))
       }
       else {
         const list = path.join(_dir, file).split("/")
         list.shift()
         const fullName = list.join("/")
-        files.push([file, fullName, path.resolve(_dir, file)])
+        files.push([file, fullName, path.resolve(base, _dir, file)])
       }
     })
   }
@@ -38,8 +38,8 @@ function create_index(dir, create_pkg_json = false) {
   // 创建package.json
   if(create_pkg_json) {
 
-    const full_pgk_file = path.resolve(__dirname, dir, "package.json")
-    const full_idx_file = path.resolve(__dirname, dir, "index.js")
+    const full_pgk_file = path.resolve(base, dir, "package.json")
+    const full_idx_file = path.resolve(base, dir, "index.js")
     fs.writeFileSync(full_pgk_file, tpl_pkg(dir))
 
   }
@@ -100,7 +100,7 @@ function create_index(dir, create_pkg_json = false) {
         })
       }
       else {
-
+        error("nothing to export in" + fullName)
         throw 'unkown type in ' + fullName
       }
       //lines.push(`  get ${moduleName}(){ return require("./${fullName}").default }, `)
@@ -119,10 +119,19 @@ ${lines.join("\n")}
 
 function renew_idx (dir) {
   const files = fs.readdirSync(dir)
+
+  const exceptions = ['node_modules', 'git', 'gitignore']
   // 循环一级目录结构
   files.forEach(file => {
-    if (fs.statSync(file).isDirectory()) {
-      create_index(file)
+
+    if (fs.statSync(path.resolve(dir, file)).isDirectory()) {
+      
+      for(let i = 0; i < exceptions.length; i++) {
+        if(file.match(new RegExp(exceptions[i]))){
+          return
+        }
+      }
+      create_index(dir, file)
     }
   })
 }
