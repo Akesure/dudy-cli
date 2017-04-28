@@ -121,8 +121,8 @@ ${lines.join("\n")}
 
 function renew_idx (dir) {
 
-  if(!dir.match(/src/)) {
-    error("You should specify a dir named src.")
+  if(!dir.match(/src|app/)) {
+    error("You should specify a dir named src or app.")
     return
   }
   const files = fs.readdirSync(dir)
