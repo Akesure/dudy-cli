@@ -1,8 +1,12 @@
 #!/usr/bin/env node
+const path = require('path')
 const readline = require("readline")
 const commandLineArgs = require("command-line-args")
 const renew_idx = require("./renew_idx")
 const {usage, prompt_usage, error} = require("./util")
+
+const {spawnSync} = require("child_process")
+
 
 
 function prompt() {
@@ -45,11 +49,16 @@ function run(){
   const optionDefinitions = [
     { name: 'help', alias: 'h', type: Boolean, defaultOption : true},
     { name: 'index', alias : 'i'},
-    { name: 'shell', alias: 's'}
+    { name: 'shell', alias: 's'},
+    { name: 'create', alias: 'c'},
+    { name: 'name', alias: 'n'},
   ]
 
   const options = commandLineArgs(optionDefinitions)
 
+  if(Object.keys(options).length == 0){
+    options.help = true
+  }
   if(options.help) {
     usage()
   } 
@@ -64,6 +73,22 @@ function run(){
         return
       }
       renew_idx(dir)
+
+    } else if (options.hasOwnProperty('create')) {
+
+      const prj_type = options.create
+
+      switch(prj_type) {
+        case "react-single-page-app" :
+
+          const result = spawnSync('sh', [path.resolve(__dirname, "sh/" + prj_type + ".sh"), options.name])
+          const output = result.output + ""
+          break
+        default:
+          error("unkown project type " + prj_type)
+
+      }
+
 
     }
   }

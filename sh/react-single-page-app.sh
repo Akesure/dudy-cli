@@ -1,5 +1,4 @@
 #!/bin/bash
-
 commonpath=$(cd `dirname $0`; pwd)
 . ${commonpath}/common.sh
 targetpath=$(pwd)

@@ -27,23 +27,37 @@ const BgWhite = "\x1b[47m"
 
 function usage(){
   console.log(`${FgBlue}`)
-  console.log('Dudy cli tools')
+  console.log('Welcome to Dudy cli tools')
   console.log(`${FgYellow}`)
-
+  console.log('A tool to imporve front-end dev. experience')
 
 
   console.log(`${FgBlue}`)
   console.log('Synopsis')
   console.log(`${FgYellow}`)
 
-  console.log('  dudy idx ./')
-  console.log('  dudy shell')
 
+  console.log("[create app]")
+  console.log('there are a few types:')
+  console.log("  react-single-page-app: Single page application with react/redux/react-router..")
+  console.log("  react-ssr-app: React application with server side rendering.")
+  console.log("  antd-admin: Ant design mis platform")
+  console.log("usage:")
+  console.log("  dudy -c [project-type]")
+  console.log("")
+
+  console.log('[namespace generator]')
+  console.log("Search root directory recursively, and generate index.js file to each first-order folder.")
+  console.log('  dudy -i ./')
+
+
+  console.log(`${FgBlue}`)
   console.log('Options')
+  console.log(`${FgYellow}`)
 
   console.log('  --help(h), Display this usage guide')
-  console.log('  --index(i) [path], Generate es6 exports to index.js')
-  console.log('  --shell(s), open dudy shell')
+  console.log('  --index(i) [path]')
+  console.log('  --create(c) [project-type]')
   console.log(Reset)
 }
 
