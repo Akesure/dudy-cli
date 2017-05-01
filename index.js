@@ -88,7 +88,7 @@ function run(){
           })
 
           child.on('exit', function(){
-            add_npm_script()
+            add_npm_script(path.resolve(process.cwd(), options.name, "package.json"))
           })
           break
         default:

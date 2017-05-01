@@ -18,10 +18,10 @@ npm_init(){
   cd $1
   npm init
   print_title "[RUN] npm install"
-  npm i react react-dom react-router-dom redux redux-thunk qs md5 redux-persist md5 underscore zepto --save
-  npm i -D webpack webpack-dev-server babel-core babel-plugin-transform-decorators stylus stylus-loader url-loader babel-preset-es2015 babel-preset-stage-0 babel-preset-react babel-polyfill --save
-  npm i -D gulp gulp-replace gulp-rename --save
-  npm i -D file-loader babel-loader express style-loader css-loader sass-loader  --save
-  npm i -D command-line-args camelcase uppercamelcase --save
+  npm i react react-dom react-router-dom redux redux-thunk qs md5 redux-persist md5 underscore zepto --save --registry https://registry.npm.taobao.org
+  npm i -D webpack webpack-dev-server babel-core babel-plugin-transform-decorators stylus stylus-loader url-loader babel-preset-es2015 babel-preset-stage-0 babel-preset-react babel-polyfill --save --registry https://registry.npm.taobao.org
+  npm i -D gulp gulp-replace gulp-rename --save --registry https://registry.npm.taobao.org
+  npm i -D file-loader babel-loader express style-loader css-loader sass-loader  --save --registry https://registry.npm.taobao.org
+  npm i -D command-line-args camelcase uppercamelcase --save --registry https://registry.npm.taobao.org
 }
 

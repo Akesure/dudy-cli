@@ -13,14 +13,22 @@ if [ -z $prj ]; then
   exit
 fi
 ## 如果目录存在，就退出
+mk=1
 if [ -d "$targetpath/$prj" ]; then
-  printf_error 'Target directory already exists${NC}'
-  exit
+  print_error 'Target directory already exists.'
+
+  read -p "Do you wish to continue?[y/n]" yn
+  case $yn in
+    [Yy]* ) mk=0; break;;
+    [Nn]* ) exit;;
+    * ) echo "Please answer yes or no.";;
+  esac
 fi
 
-mkdir $targetpath/$prj
-cp -r $basepath/react-single-page-app/* $targetpath/$prj/ 
-
+if [ $mk -eq 1 ];then
+  mkdir $targetpath/$prj
+  cp -r $basepath/react-single-page-app/* $targetpath/$prj/ 
+fi
 npm_init $targetpath/$prj
 
 
