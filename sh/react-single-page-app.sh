@@ -1,4 +1,5 @@
 #!/bin/bash
+echo 'create react-single-page-app'
 commonpath=$(cd `dirname $0`; pwd)
 . ${commonpath}/common.sh
 targetpath=$(pwd)

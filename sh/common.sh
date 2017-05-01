@@ -23,6 +23,5 @@ npm_init(){
   npm i -D gulp gulp-replace gulp-rename --save
   npm i -D file-loader babel-loader express style-loader css-loader sass-loader  --save
   npm i -D command-line-args camelcase uppercamelcase --save
-
-
 }
+

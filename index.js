@@ -5,7 +5,9 @@ const commandLineArgs = require("command-line-args")
 const renew_idx = require("./renew_idx")
 const {usage, prompt_usage, error} = require("./util")
 
-const {spawnSync} = require("child_process")
+const {spawn} = require("child_process")
+
+const add_npm_script = require("./add_npm_script")
 
 
 
@@ -81,8 +83,13 @@ function run(){
       switch(prj_type) {
         case "react-single-page-app" :
 
-          const result = spawnSync('sh', [path.resolve(__dirname, "sh/" + prj_type + ".sh"), options.name])
-          const output = result.output + ""
+          const child = spawn('sh' , [ path.resolve(__dirname, "sh/" + prj_type + ".sh"), options.name ], {
+              stdio: 'inherit' 
+          })
+
+          child.on('exit', function(){
+            add_npm_script()
+          })
           break
         default:
           error("unkown project type " + prj_type)
