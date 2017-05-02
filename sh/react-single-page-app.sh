@@ -28,6 +28,7 @@ fi
 if [ $mk -eq 1 ];then
   mkdir $targetpath/$prj
   cp -r $basepath/react-single-page-app/* $targetpath/$prj/ 
+  cp $basepath/react-single-page-app/.babelrc $targetpath/$prj/
 fi
 npm_init $targetpath/$prj
 
