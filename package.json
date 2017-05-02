@@ -20,6 +20,8 @@
   "homepage": "https://github.com/ramroll/dudy-cli#readme",
   "description": "",
   "dependencies": {
-    "command-line-args": "^4.0.3"
+    "command-line-args": "^4.0.3",
+    "gulp": "^3.9.1",
+    "gulp-replace": "^0.5.4"
   }
 }

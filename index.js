@@ -55,8 +55,11 @@ function run(){
     { name: 'shell', alias: 's'},
     { name: 'create', alias: 'c'},
     { name: 'name', alias: 'n'},
-    { name: 'version', alias : 'v'}
-  ]
+    { name: 'version', alias : 'v'},
+    { name: 'plugin', alias : 'p'},
+    { name: 'js' },
+    { name: 'html'}
+ ]
 
   const options = commandLineArgs(optionDefinitions)
 
@@ -101,11 +104,17 @@ function run(){
           break
         default:
           error("unkown project type " + prj_type)
-
+      } 
+    } else if (options.hasOwnProperty('plugin')) {
+      const plugin = options.plugin
+      if(plugin === 'qiniu') {
+        const pluginFunction = require(__dirname + "/plugins/" + options.plugin + "/index.js")
+        pluginFunction(options.js, options.html)
       }
 
-
     }
+
+
   }
 }
 
