@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 const path = require('path')
+const fs = require('fs')
 const readline = require("readline")
 const commandLineArgs = require("command-line-args")
 const renew_idx = require("./renew_idx")
@@ -54,6 +55,7 @@ function run(){
     { name: 'shell', alias: 's'},
     { name: 'create', alias: 'c'},
     { name: 'name', alias: 'n'},
+    { name: 'version', alias : 'v'}
   ]
 
   const options = commandLineArgs(optionDefinitions)
@@ -76,7 +78,13 @@ function run(){
       }
       renew_idx(dir)
 
-    } else if (options.hasOwnProperty('create')) {
+    } else if (options.hasOwnProperty('version')){
+
+      const pkgJson = JSON.parse(fs.readFileSync(path.resolve(__dirname, './package.json')))
+      console.log("dudy-cli version " + pkgJson.version)
+
+    } 
+    else if (options.hasOwnProperty('create')) {
 
       const prj_type = options.create
 
