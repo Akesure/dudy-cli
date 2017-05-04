@@ -5,7 +5,6 @@ module.exports = function (js_install_path, html_file) {
 
   const files = [
     "moxie.min.js", 
-    "Moxie.swf", 
     "plupload.min.js", 
     "qiniu.min.js"]
 
@@ -22,14 +21,13 @@ module.exports = function (js_install_path, html_file) {
 
 
   gulp.task("copy", function () {
-    gulp.src(files)
+    gulp.src(srcFiles)
       .pipe(gulp.dest(js_install_path))
   })
 
 
   const srcs = gulp.src(tarFiles)
 
-  console.log(scriptFiles)
   gulp.task("inject", function(){
     gulp.src(html_file)
       .pipe(replace(/<!--\s+plugin:(\w+)\s+-->/, scriptFiles))

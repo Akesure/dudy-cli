@@ -56,12 +56,15 @@ function dev_config(entry, options) {
         },
         {
           test : /\.sass$/,
-          loader : 'style-loader!css_loader!sass-loader'
+          loader : 'style-loader!css-loader!sass-loader'
         },
         {
           test: /\.(png|gif|jpg|ico)$/,
           exclude: /(node_modules|bower_components)/,
           loader: 'url?limit=100000'
+        },
+        {
+          test : /\.less$/, loader : 'style-loader!css-loader!less-loader'
         },
         { test: /\.css$/, loader: "style-loader!css-loader" },
       ]
