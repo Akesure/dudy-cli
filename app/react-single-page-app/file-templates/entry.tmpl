@@ -11,10 +11,18 @@ import {
 } from 'react-router-dom'
 
 import {get_current_path} from 'helper'
-
+import {init_store} from 'store'
+import {Provider} from 'react-redux'
 
 // 获取当前的网址
 const base = get_current_path()
+
+
+const Layout = ({children}) => {
+  return <div>
+    {children}
+  </div>
+}
 
 
 class App extends Component{
