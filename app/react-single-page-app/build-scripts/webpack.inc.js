@@ -11,7 +11,7 @@ const base = path.resolve(__dirname, "../")
 function dll_config() {
   return {
     entry: {
-      'react': ['zepto',  'react', 'react-dom', 'qs', 'url-parse', 'redux', 'react-redux', 'redux-thunk', 'babel-polyfill', 'md5', 'underscore']
+      'react': ['zepto',  'react', 'react-dom', 'qs', 'url-parse', 'redux', 'react-redux', 'redux-thunk', 'md5', 'underscore']
     },
     output: {
       path: path.join(base, "dist/js"),
@@ -33,7 +33,7 @@ function dev_config(entry, options) {
   }
   const conf = {
     devtool: "#source-map",
-    entry: [path.resolve(base, 'src/entry/' , entry)],
+    entry: ['babel-polyfill', path.resolve(base, 'src/entry/' , entry)],
     output: {
       path: path.resolve(base , "dist"),
       filename: "js/" + entry + ".js"

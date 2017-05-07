@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
 import ReactDOM from 'react-dom'
 
-import __SCREEN_NAME__ from "screen/__SCREEN_NAME__"
+import Screens from "screen"
 import {AppContainer} from 'container'
 
 import {
@@ -17,15 +17,39 @@ import {get_current_path} from 'helper'
 const base = get_current_path()
 
 
-const Entry = () => {
-  return <Router> 
-    <Route exact path={base} component={__SCREEN_NAME__} />
-  </Router>
+class App extends Component{
+
+  constructor(){
+    super()
+    this.state = { store : null }
+  }
+
+  componentWillMount(){
+
+    init_store().then(store => {
+      this.setState({
+        store
+
+      })
+    })
+  }
+
+  render() {
+    if(!this.state.store) {return null}
+    return <Provider store={this.state.store}>
+      <Router>
+        <Route path='/' >
+          <Layout>
+            <Route exact path="" component={Screens.__SCREEN_NAME__}>
+          </Layout>
+        </Route>
+      </Router>
+    </Provider>
+
+  }
 }
 
 
 ReactDOM.render(
-  <AppContainer>
-    <Entry />
-  </AppContainer>, 
+  <App />, 
   document.getElementById("app"))
