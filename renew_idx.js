@@ -3,6 +3,7 @@ const path = require('path')
 
 const {usage, prompt_usage, error} = require("./util")
 
+const PATH_SPLITER = new RegExp('[/\\\\]')
 /**
  * 创建package.json的模板
  */
@@ -10,9 +11,7 @@ const tpl_pkg = (pkgName) => {
   return `{
   "name" : "${pkgName}"
 }
-
   `
-
 }
 
 function create_index(base, dir, create_pkg_json = false) {
@@ -25,7 +24,7 @@ function create_index(base, dir, create_pkg_json = false) {
         find_files_rec(path.join(_dir, file))
       }
       else {
-        const list = path.join(_dir, file).split("/")
+        const list = path.join(_dir, file).split(PATH_SPLITER)
         list.shift()
         const fullName = list.join("/")
         files.push([file, fullName, path.resolve(base, _dir, file)])
