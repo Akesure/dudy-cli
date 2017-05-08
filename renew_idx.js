@@ -74,7 +74,6 @@ function create_index(base, dir, create_pkg_json = false) {
           const __lines = m[0].split('\n')
 
           __lines.filter(x => x.match(/:/)).forEach(line => {
-            
             const [l, r] = line.split(":").map(x => x.trim())
             lines.push(`  get ${l}() { return require("./${fullName}").${l} },`)
           })
