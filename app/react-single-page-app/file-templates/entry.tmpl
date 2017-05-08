@@ -15,50 +15,54 @@ import {init_store} from 'store'
 import {Provider} from 'react-redux'
 import "../global.js"
 
-// 获取当前的网址
-const base = get_current_path()
+import RedBox from 'redbox-react'
 
-
-const Layout = ({children}) => {
-  return <div>
-    {children}
-  </div>
-}
-
-
-class App extends Component{
-
-  constructor(){
-    super()
-    this.state = { store : null }
+try{
+  const Layout = ({children}) => {
+    return <div>
+      {children}
+    </div>
   }
 
-  componentWillMount(){
 
-    init_store().then(store => {
-      this.setState({
-        store
+  class App extends Component{
 
+    constructor(){
+      super()
+      this.state = { store : null }
+    }
+
+    componentWillMount(){
+
+      init_store().then(store => {
+        this.setState({
+          store
+
+        })
       })
-    })
+    }
+
+    render() {
+      if(!this.state.store) {return null}
+      return <Provider store={this.state.store}>
+        <Router>
+          <Route path='/' >
+            <Layout>
+              <Route exact path="" component={Screens.__SCREEN_NAME__} />
+            </Layout>
+          </Route>
+        </Router>
+      </Provider>
+
+    }
   }
 
-  render() {
-    if(!this.state.store) {return null}
-    return <Provider store={this.state.store}>
-      <Router>
-        <Route path='/' >
-          <Layout>
-            <Route exact path="" component={Screens.__SCREEN_NAME__} />
-          </Layout>
-        </Route>
-      </Router>
-    </Provider>
 
-  }
+  ReactDOM.render(
+    <App />,
+    document.getElementById("app"))
+}catch(e) {
+  ReactDOM.render(
+    <Redbox error={e} />,
+    document.getElementById("app"))
 }
-
-
-ReactDOM.render(
-  <App />, 
-  document.getElementById("app"))

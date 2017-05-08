@@ -8,7 +8,7 @@ const fs = require("fs")
 const WebpackDevServer = require("webpack-dev-server")
 
 
-const node_env = process.env.NODE_ENV
+const node_env = process.env.NODE_ENV.trim()
 const FgRed = "\x1b[31m"
 
 const Reset = "\x1b[0m"
@@ -56,7 +56,7 @@ function compile_dll(dll_conf, callback) {
 
 // 创建enry如果没有创造
 create_entry(entry, () => {
-  if (process.env.NODE_ENV === 'development') {
+  if (node_env === 'development') {
     // Build dll module if not exists
     before_build(entry)
     compile_dll(dll_config(), function () {
@@ -65,6 +65,7 @@ create_entry(entry, () => {
       const server = new WebpackDevServer(compiler, {
         contentBase: path.resolve(__dirname, "../dist"),
         stats: { colors: true },
+        inline : true,
 
         // 如果要使用https协议需要引入证书文件
         // 具体参考webpack-dev-server的文档
@@ -89,6 +90,3 @@ create_entry(entry, () => {
     })
 }
 })
-
-
-

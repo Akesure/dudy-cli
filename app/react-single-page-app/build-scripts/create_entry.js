@@ -6,6 +6,7 @@ const gulp = require("gulp")
 const replace = require("gulp-replace")
 const rename = require("gulp-rename")
 const upperCamelCase = require('uppercamelcase')
+const {execSync} = require("child_process")
 
 
 module.exports = function(entry, callback){
@@ -27,7 +28,6 @@ module.exports = function(entry, callback){
 
         const camelEntry = upperCamelCase(entry)
 
-        console.log(camelEntry)
 
         gulp.task("entry", function(){
           gulp.src(path.resolve(__dirname, '../file-templates/entry.tmpl'))
@@ -44,9 +44,14 @@ module.exports = function(entry, callback){
         })
 
         gulp.start(['entry', 'screen'])
-        rl.close()
-        callback()
-        console.log('done')
+
+        setTimeout( () => {
+
+          execSync("dudy -i " + path.resolve(__dirname, "../src"))
+          rl.close()
+          callback()
+          console.log('done')
+        }, 500)
       }
       else {
         process.exit()
@@ -55,11 +60,11 @@ module.exports = function(entry, callback){
 
     })
 
-    
+
   }else {
 
     callback()
   }
 
-  
+
 }
