@@ -29,7 +29,7 @@ npm_init(){
     webpack-dev-server babel-core babel-plugin-transform-decorators \
     stylus stylus-loader url-loader babel-preset-es2015 babel-preset-stage-0 \
     babel-preset-react babel-polyfill \
-    gulp gulp-replace gulp-rename \ 
+    gulp gulp-replace gulp-rename \
     file-loader babel-loader express style-loader \
     less less-loader css-loader node-sass sass-loader \
     command-line-args camelcase uppercamelcase 
