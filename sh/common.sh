@@ -31,7 +31,7 @@ npm_init(){
     babel-preset-react babel-polyfill \
     gulp gulp-replace gulp-rename \ 
     file-loader babel-loader express style-loader \
-    less less-loader css-loader node-sass sass-loader \ 
+    less less-loader css-loader node-sass sass-loader \
     command-line-args camelcase uppercamelcase 
 }
 

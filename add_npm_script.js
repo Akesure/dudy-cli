@@ -5,6 +5,7 @@ function add_npm_script(file) {
 
   json.scripts = {
     dev : "dudy -i ./src && NODE_ENV=development ./build-scripts/webpack.build.js -e",
+    dev_win : "dudy -i ./src && set NODE_ENV=development && ./build-scripts/webpack.build.js -e",
     build: "NODE_ENV=publish ./build-scripts/webpack.build.js -e"
   }
 
