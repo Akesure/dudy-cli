@@ -68,8 +68,21 @@ function create_index(base, dir, create_pkg_json = false) {
 
       }
       else if (fileContent.match(/module.exports/)) {
-        const _line = `  get ${moduleName}() { return require("./${fullName}") },`
-        lines.push(_line)
+
+        if(fileContent.match(/module.exports\s+=\s+\{/)){
+          const m = fileContent.match(/module.exports\s+=\s+\{(.|\n)+\}/)
+          const __lines = m[0].split('\n')
+
+          __lines.filter(x => x.match(/:/)).forEach(line => {
+            
+            const [l, r] = line.split(":").map(x => x.trim())
+            lines.push(`  get ${l}() { return require("./${fullName}").${l} },`)
+          })
+
+        } else {
+          const _line = `  get ${moduleName}() { return require("./${fullName}") },`
+          lines.push(_line)
+        }
       }
       else if (fileContent.match(/export\s+let\s+\w+/)) {
 
