@@ -65,13 +65,12 @@ create_entry(entry, () => {
       const server = new WebpackDevServer(compiler, {
         contentBase: path.resolve(__dirname, "../dist"),
         stats: { colors: true },
+
+        // 如果要使用https协议需要引入证书文件
+        // 具体参考webpack-dev-server的文档
         proxy : {
           '/api/*' : {
-            target : {
-              "host" : 'ketang.zhufengpeixun.cn',
-              "protocol" : "https",
-              "port" : 443
-            },
+            target : "http://sometest.com",
             logLevel : 'debug',
             secure :  false,
             changeOrigin: true
