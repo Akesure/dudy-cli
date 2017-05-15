@@ -8,6 +8,7 @@ Dudy cli is a collection of fe. dev tools.
 ```
 npm i cnpm -g
 npm i dudy-cli -g
+cnpm i webpack -g
 ```
 
 ### Upgrade
