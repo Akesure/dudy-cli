@@ -6,7 +6,7 @@ const commandLineArgs = require("command-line-args")
 const renew_idx = require("./renew_idx")
 const {usage, prompt_usage, error} = require("./util")
 
-const {spawn} = require("child_process")
+const {spawn, execSync} = require("child_process")
 
 const add_npm_script = require("./add_npm_script")
 
@@ -57,6 +57,7 @@ function run(){
     { name: 'name', alias: 'n'},
     { name: 'version', alias : 'v'},
     { name: 'plugin', alias : 'p'},
+    { name: 'upgrade', aliax : 'upgrade'},
     { name: 'js' },
     { name: 'html'}
  ]
@@ -87,6 +88,18 @@ function run(){
       console.log("dudy-cli version " + pkgJson.version)
 
     } 
+    else if(options.hasOwnProperty('upgrade')) {
+
+
+      const prj_type = options.upgrade
+      const child = spawn('sh' , [ path.resolve(__dirname, "sh/upgrade-" + prj_type + ".sh")], {
+        stdio : 'inherit'
+      })
+      child.on('exit', function () {
+        add_npm_script(path.resolve(process.cwd(), options.name, "package.json"))
+      })
+
+    }
     else if (options.hasOwnProperty('create')) {
 
       const prj_type = options.create

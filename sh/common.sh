@@ -11,6 +11,9 @@ print_error(){
   printf "${RED}$1${NC}\n"
 }
 
+print(){
+  printf "${YELLOW}$1${NC}\n"
+}
 
 
 npm_init(){
@@ -18,14 +21,15 @@ npm_init(){
   cd $1
   npm init
   print_title "[RUN] npm install"
-
   print_title "  install dependencies"
+
   cnpm i autoprefixer react react-dom react-router-dom \
       react-redux redux redux-thunk qs md5 redux-persist \
+      react-tap-event-plugin \
       md5 underscore zepto --save 
 
   print_title "  install devDependencies"
-  cnpm i -D  redbox-react react-class-mixin webpack \
+  cnpm i -D  redbox-react webpack \
     webpack-dev-server babel-core babel-plugin-transform-decorators \
     stylus stylus-loader url-loader babel-preset-es2015 babel-preset-stage-0 \
     babel-preset-react babel-polyfill \

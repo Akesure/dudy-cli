@@ -28,7 +28,7 @@ const options = commandLineArgs(optionDefinitions)
 
 
 
-const {dev_config, dll_config} = require("./webpack.inc.js")
+const {dev_config, release_config, dll_config} = require("./webpack.inc.js")
 
 
 const {entry} = options

@@ -36,7 +36,8 @@ function dev_config(entry, options) {
     entry: ['babel-polyfill', path.resolve(base, 'src/entry/' , entry)],
     output: {
       path: path.resolve(base , "dist"),
-      filename: "js/" + entry + ".js"
+      filename: "js/" + entry + ".js",
+      publicPath : path.resolve(base, 'dist')
     },
     plugins: [
       new webpack.DllReferencePlugin({
@@ -55,13 +56,13 @@ function dev_config(entry, options) {
           loader: 'style-loader!css-loader!stylus-loader'
         },
         {
-          test : /\.sass$/,
+          test : /\.(sass|scss)$/,
           loader : 'style-loader!css-loader!sass-loader'
         },
         {
-          test: /\.(png|gif|jpg|ico)$/,
+          test: /\.(png|gif|jpg|jpeg|ico)$/,
           exclude: /(node_modules|bower_components)/,
-          loader: 'url?limit=100000'
+          loader: 'file-loader?name=[name]-[hash].[ext]&outputPath=image/',
         },
         {
           test : /\.less$/, loader : 'style-loader!css-loader!less-loader'

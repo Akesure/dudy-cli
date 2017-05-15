@@ -14,7 +14,17 @@ export default class __SCREEN_NAME__ extends Component{
   render(){
     return <div>
       <h1>__SCREEN_NAME__</h1>
+      <h2>样式引入</h2>
+      <h3 className="demo-css">这是用css渲染的样式</h3>
+      <h3 className='demo-scss'>这是用scss渲染的样式</h3>
+      <h3 className='demo-sass'>这是用sass渲染的样式</h3>
+      <h3 className='demo-less'>这是用less渲染的样式</h3>
+      <h3 className='demo-styl'>这是用styl渲染的样式</h3>
+      <h2>图片加载</h2>
+      <h3>本地图片加载</h3>
+      <img src={require("image/demo.jpeg")} />
     </div>
+
   }
 }
 

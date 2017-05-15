@@ -15,8 +15,22 @@ import {init_store} from 'store'
 import {Provider} from 'react-redux'
 import "../global.js"
 
+
+// 允许TouchTap事件
+// TouchaTap事件模拟的onTouchTap替代onClick可以让移动端相应更加快
+var injectTapEventPlugin = require("react-tap-event-plugin");
+injectTapEventPlugin()
+
+// redbox 用于报错
 import RedBox from 'redbox-react'
 
+
+// 样式文件引入
+import "style/demo.less"
+import "style/demo.css"
+import "style/demo.styl"
+import "style/demo.scss"
+import "style/demo.sass"
 try{
   const Layout = ({children}) => {
     return <div>
@@ -62,7 +76,22 @@ try{
     <App />,
     document.getElementById("app"))
 }catch(e) {
+  if(! (e instanceof Error ) ){
+    e = new Error(e)
+  }
   ReactDOM.render(
-    <Redbox error={e} />,
+    <RedBox error={e} />,
     document.getElementById("app"))
+}
+
+
+// 对全局异常的监控
+window.onerror = function(msg, url, line, col, error){
+  let extra = !col ? '' : '\ncolumn: ' + col
+  extra += !error ? '' : '\nerror: ' + error
+  const e = new Error("Error: " + msg + "\nurl: " + url + "\nline: " + line + extra)
+  ReactDOM.render(
+    <RedBox error={e} />,
+    document.getElementById("app"))
+
 }

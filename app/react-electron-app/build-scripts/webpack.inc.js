@@ -78,7 +78,59 @@ function dev_config(entry, options) {
 }
 
 
+function release_config(entry, options) {
+  const defaultOptions = {
+  }
+  const conf = {
+    entry: ['babel-polyfill', path.resolve(base, 'src/entry/' , entry)],
+    output: {
+      path: path.resolve(base , "dist"),
+      filename: "js/" + entry + ".js",
+    },
+    plugins: [
+      new webpack.DllReferencePlugin({
+        context: process.cwd(),
+        manifest: require( path.resolve(base , 'dist/js/react-manifest.json') )
+      })
+    ],
+    module: {
+      loaders: [
+        {
+          test: /\.js$/,
+          exclude: /(node_modules|bower_components)/,
+          loaders: ['babel-loader'], // 'babel-loader' is also a legal name to reference
+        }, {
+          test: /\.styl$/,
+          loader: 'style-loader!css-loader!stylus-loader'
+        },
+        {
+          test : /\.(sass|scss)$/,
+          loader : 'style-loader!css-loader!sass-loader'
+        },
+        {
+          test: /\.(png|gif|jpg|jpeg|ico)$/,
+          exclude: /(node_modules|bower_components)/,
+          loader: 'file-loader?name=[name]-[hash].[ext]&outputPath=image/',
+        },
+        {
+          test : /\.less$/, loader : 'style-loader!css-loader!less-loader'
+        },
+        { test: /\.css$/, loader: "style-loader!css-loader" },
+      ]
+    },
+    resolve: {
+      modules : ['node_modules', path.resolve(base, 'src')]
+    }
+  }
+
+  return conf
+}
+
+
+
+
 module.exports = {
   dll_config,
-  dev_config
+  dev_config,
+  release_config
 }
