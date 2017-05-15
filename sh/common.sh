@@ -25,7 +25,7 @@ npm_init(){
 
   cnpm i autoprefixer react react-dom react-router-dom \
       react-redux redux redux-thunk qs md5 redux-persist \
-      react-tap-event-plugin \
+      react-tap-event-plugin axios \
       md5 underscore zepto --save 
 
   print_title "  install devDependencies"

@@ -28,7 +28,7 @@ const options = commandLineArgs(optionDefinitions)
 
 
 
-const {dev_config, release_config, dll_config} = require("./webpack.inc.js")
+const {dev_config, release_config, dll_config, dll_config_production} = require("./webpack.inc.js")
 
 
 const {entry} = options
@@ -44,7 +44,7 @@ if(!entry) {
 }
 
 function compile_dll(dll_conf, callback) {
-  if (!fs.existsSync(path.resolve(__dirname, "../dist", 'js/react-manifest.json'))) {
+  if (!fs.existsSync(path.resolve(__dirname, "../dist/dev", 'js/react-manifest.json'))) {
     const compiler = webpack(dll_conf)
     compiler.run(function (err, stats) {
       callback()
@@ -52,6 +52,14 @@ function compile_dll(dll_conf, callback) {
   } else {
     callback()
   }
+}
+
+
+function compile_dll_prod(dll_conf, callback) {
+  const compiler = webpack(dll_conf)
+  compiler.run(function (err, stats) {
+    callback()
+  })
 }
 
 // 创建enry如果没有创造
@@ -63,7 +71,7 @@ create_entry(entry, () => {
       const webpack_conf = dev_config(entry)
       const compiler = webpack(webpack_conf)
       const server = new WebpackDevServer(compiler, {
-        contentBase: path.resolve(__dirname, "../dist"),
+        contentBase: path.resolve(__dirname, "../dist/dev"),
         stats: { colors: true },
         inline : true,
 
@@ -83,10 +91,13 @@ create_entry(entry, () => {
 
 
   } else if (process.env.NODE_ENV === 'production') {
-    const webpack_conf = release_config(entry)
-    const compiler = webpack(webpack_conf)
-    compiler.run(function (err, stat) {
-
+    const compiler1 = webpack(dll_config_production())
+    compiler1.run(function (err, stats) {
+      const webpack_conf = release_config(entry)
+      const compiler = webpack(webpack_conf)
+      compiler.run(function (err, stat) {
+      })
     })
-}
+
+  }
 })
