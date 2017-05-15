@@ -10,6 +10,18 @@ npm i cnpm -g
 npm i dudy-cli -g
 ```
 
+### Upgrade
+```
+# re-install dudy-cli to latest version
+npm i dudy-cli -g
+
+cd [your-project-name] 
+dudy --upgrade react-single-page-app
+
+
+```
+
+
 ### es6 module management tools
 
 The following script add index.js to first order directores.
