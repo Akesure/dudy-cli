@@ -23,6 +23,21 @@ export default class __SCREEN_NAME__ extends Component{
       <h2>图片加载</h2>
       <h3>本地图片加载</h3>
       <img src={require("image/demo.jpeg")} />
+      <h3>Css Inline背景图片示例</h3>
+      <div style={{
+        backgroundColor : 'white',
+        backgroundImage : `url(${require("image/demo.jpeg")})`,
+        width : 100,
+        height : 100
+      }}></div>
+
+      <h3>css-class 背景图片示例</h3>
+      <div className='demo-image'></div>
+
+      <h2>路由跳转说明</h2>
+
+      <h3><a onTouchTap={() => this.props.history.push('/demo')}>点击此处跳转</a></h3>
+
     </div>
 
   }

@@ -62,7 +62,8 @@ try{
         <Router>
           <Route path='/' >
             <Layout>
-              <Route exact path="" component={Screens.__SCREEN_NAME__} />
+               <Route exact path="/" component={Screens.Test} />
+               <Route path="/demo" component={Screens.Demo} />
             </Layout>
           </Route>
         </Router>
