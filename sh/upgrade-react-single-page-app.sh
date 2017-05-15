@@ -15,15 +15,25 @@ fi
 print 'build script found, continue upgrade'
 
 print "[upgrade] buildscripts"
-cp $basepath/react-single-page-app/build-scripts/* $targetpath/build-scripts/
-
+cp -f  $basepath/react-single-page-app/build-scripts/* $targetpath/build-scripts/
 print "[upgrade] file timeplates" 
-cp $basepath/react-single-page-app/file-templates/* $targetpath/file-templates
+cp -f $basepath/react-single-page-app/file-templates/* $targetpath/file-templates
+
 
 if [ ! -d $targetpath/src/image ]; then
+  print "[upgrade] image demo" 
   mkdir -p $targetpath/src/image 
   cp $basepath/react-single-page-app/src/image/demo.jpeg $targetpath/src/image/
 fi
+
+
+if [ ! -d $targetpath/src/style ]; then
+  print "[upgrade] style deme" 
+  mkdir -p $targetpath/src/style
+fi
+
+cp $basepath/react-single-page-app/src/style/* $targetpath/src/style/
+
 
 if [ ! -d $targetpath/src/action ]; then
   mkdir -p $targetpath/src/action

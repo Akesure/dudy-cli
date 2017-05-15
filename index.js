@@ -96,7 +96,7 @@ function run(){
         stdio : 'inherit'
       })
       child.on('exit', function () {
-        add_npm_script(path.resolve(process.cwd(), options.name, "package.json"))
+        add_npm_script(path.resolve(process.cwd(), "package.json"))
       })
 
     }

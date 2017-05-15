@@ -1,0 +1,8 @@
+.demo-css{
+  color : #3423df;
+  cursor : pointer;
+}
+
+.demo-css:hover{
+  color : #823fdf;
+}

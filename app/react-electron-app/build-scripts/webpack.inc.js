@@ -59,9 +59,9 @@ function dev_config(entry, options) {
           loader : 'style-loader!css-loader!sass-loader'
         },
         {
-          test: /\.(png|gif|jpg|ico)$/,
+          test: /\.(png|gif|jpg|jpeg|ico)$/,
           exclude: /(node_modules|bower_components)/,
-          loader: 'url?limit=100000'
+          loader: 'file-loader?name=[name]-[hash].[ext]&outputPath=image/&publicPath=/',
         },
         {
           test : /\.less$/, loader : 'style-loader!css-loader!less-loader'
