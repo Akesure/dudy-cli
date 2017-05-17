@@ -25,6 +25,7 @@ npm_init(){
 
   cnpm i autoprefixer react react-dom react-router-dom \
       react-redux redux redux-thunk qs md5 redux-persist \
+      animated inline-style-prefixer \
       react-tap-event-plugin axios \
       md5 underscore zepto --save 
 
