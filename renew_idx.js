@@ -65,7 +65,9 @@ function create_index(base, dir, create_pkg_json = false) {
           const _line = `  get ${n}() { return  require("./${fullName}").default },`
           lines.push(_line)
         })
-
+      }
+      else if (fileContent.match(/export\s+default\s/)) {
+        lines.push(`  get ${moduleName}() { return require("./${fullName}").default },`)
       }
       else if (fileContent.match(/module.exports/)) {
 
