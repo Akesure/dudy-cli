@@ -52,11 +52,19 @@ function create_index(base, dir, create_pkg_json = false) {
     if (!fullName.match(/\.js$/)) {
       return
     }
+
     if (!name.match(/package\.json|index\.js|global/)) {
-
       const moduleName = name.split(".").shift()
-      const fileContent = fs.readFileSync(fullFileName, 'utf-8')
+      let fileContent = fs.readFileSync(fullFileName, 'utf-8')
 
+      fileContent = fileContent.split('\n')
+        .filter(l => !l.match(/^\/\//))
+        .filter(l => !l.match(/^\/\*/))
+        .join("\n")
+        
+      if(fileContent.match(/^\/\//)) {
+        return
+      }
       if (fileContent.match(/export\s+default\s+class\s+\w+/)) {
         const m = fileContent.match(/export\s+default\s+class\s+\w+/g)
         m.forEach(k => {
