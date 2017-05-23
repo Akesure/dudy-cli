@@ -27,19 +27,18 @@ fi
 
 if [ $mk -eq 1 ];then
   mkdir $targetpath/$prj
-  cp -r $basepath/react-component-library/* $targetpath/$prj/ 
-  mkdir $targetpath/$prj/examples
-  cp $basepath/react-single-page-app/* $targetpath/$prj/examples/
-  cp $basepath/react-single-page-app/.babelrc $targetpath/$prj/
-  cp $basepath/react-single-page-app/.babelrc $targetpath/$prj/examples
+  cp -r $basepath/react-component-library/* $targetpath/$prj/
+  cp -r $basepath/react-single-page-app/.babelrc $targetpath/$prj/
   npm_init_library $targetpath/$prj/
+  rm -rf $targetpath/$prj/node_modules
 
   cp $targetpath/$prj/package.json $targetpath/$prj/pkg.bak
-  cp $targetpath/$prj/examples/package.json $targetpath/$prj/
+  cp $targetpath/$prj/example/package.json $targetpath/$prj/
   cd $targetpath/$prj
   cnpm install
   cp $targetpath/$prj/pkg.bak $targetpath/$prj/package.json
   dudy -i $targetpath/$prj/src
+  rm $targetpath/$prj/pkg.bak
 
 fi
 

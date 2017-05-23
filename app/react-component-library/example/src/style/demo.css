@@ -1,0 +1,15 @@
+.demo-css{
+  color : #3423df;
+  cursor : pointer;
+}
+
+.demo-css:hover{
+  color : #823fdf;
+}
+
+
+.demo-image {
+  background: url("../image/demo.jpeg");
+  width : 200px;
+  height : 200px;
+}
