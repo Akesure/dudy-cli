@@ -40,3 +40,22 @@ npm_init(){
     command-line-args camelcase uppercamelcase 
 }
 
+
+
+npm_init_library(){
+  print_title "[RUN]npm init"
+  cd $1
+  npm init
+  print_title "[RUN] npm install"
+  print_title "  install dependencies"
+
+  cnpm i react react-dom \
+      animated inline-style-prefixer \
+      redux react-redux --save
+
+  print_title "  install devDependencies"
+  cnpm i -D  redbox-react webpack \
+    babel-core babel-plugin-transform-decorators \
+    babel-preset-es2015 babel-preset-stage-0 \
+    babel-preset-react babel-polyfill 
+}

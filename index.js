@@ -108,6 +108,7 @@ function run(){
 
       switch(prj_type) {
         case "react-single-page-app" :
+        case "react-component-library" :
 
           const child = spawn('sh' , [ path.resolve(__dirname, "sh/" + prj_type + ".sh"), options.name ], {
               stdio: 'inherit' 
@@ -117,6 +118,7 @@ function run(){
             add_npm_script(path.resolve(process.cwd(), options.name, "package.json"))
           })
           break
+        
         default:
           error("unkown project type " + prj_type)
       } 
