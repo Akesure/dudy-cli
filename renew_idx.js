@@ -140,28 +140,39 @@ ${lines.join("\n")}
 }
 
 
-function renew_idx (dir) {
+function renew_idx (dir, type = 'prj') {
 
-  if(!dir.match(/src|app/)) {
+  if(type === 'prj' && !dir.match(/src|app/)) {
     error("You should specify a dir named src or app.")
     return
   }
   const files = fs.readdirSync(dir)
 
   const exceptions = ['node_modules', 'git', 'gitignore']
-  // 循环一级目录结构
-  files.forEach(file => {
 
-    if (fs.statSync(path.resolve(dir, file)).isDirectory()) {
-      
-      for(let i = 0; i < exceptions.length; i++) {
-        if(file.match(new RegExp(exceptions[i]))){
-          return
+  if(type === 'dir') {
+    const file = path.resolve(dir)
+    const file_prts = file.split(PATH_SPLITER)
+    const f_name = file_prts.pop()
+    const base = file_prts.join("/")
+
+
+    create_index(base, f_name)
+  } else if (type === 'prj') {
+    // 循环一级目录结构
+    files.forEach(file => {
+
+      if (fs.statSync(path.resolve(dir, file)).isDirectory()) {
+
+        for (let i = 0; i < exceptions.length; i++) {
+          if (file.match(new RegExp(exceptions[i]))) {
+            return
+          }
         }
+        create_index(dir, file)
       }
-      create_index(dir, file)
-    }
-  })
+    })
+  }
 }
 
 

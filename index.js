@@ -52,6 +52,7 @@ function run(){
   const optionDefinitions = [
     { name: 'help', alias: 'h', type: Boolean, defaultOption : true},
     { name: 'index', alias : 'i'},
+    { name: 'type', alias : 't'},
     { name: 'shell', alias: 's'},
     { name: 'create', alias: 'c'},
     { name: 'name', alias: 'n'},
@@ -80,9 +81,10 @@ function run(){
         error('path is needed!')  
         return
       }
-      renew_idx(dir)
+      
+      renew_idx(dir, options.type)
 
-    } else if (options.hasOwnProperty('version')){
+    }  else if (options.hasOwnProperty('version')){
 
       const pkgJson = JSON.parse(fs.readFileSync(path.resolve(__dirname, './package.json')))
       console.log("dudy-cli version " + pkgJson.version)
