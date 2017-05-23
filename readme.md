@@ -1,6 +1,6 @@
 ### dudy-cli
 
-Dudy cli is a collection of fe. dev tools.
+dudy-cli 帮助大家创建FE项目。
 
 
 ### install
@@ -17,25 +17,31 @@ cnpm i webpack -g
 npm i dudy-cli -g
 
 cd [your-project-name] 
-dudy --upgrade react-single-page-app
 
+dudy --upgrade react-single-page-app
 
 ```
 
 
-### es6 module management tools
+### es6 index.js生成工具 
 
-The following script add index.js to first order directores.
+
+为整个项目目录生成index.js
 
 ```
 dudy -i [target source folder]
 ```
-Target source folder must named as src
 
-### project template
+
+为单个目录生成index.js
+```
+dudy -t dir -i [target source folder]
+```
+
+### 脚手架 - 单页面应用
 
 ```
-# create project
+# 创建单页面应用 
 dudy -c react-single-page-app -n [your-project-name]
 
 # dev project
@@ -47,3 +53,23 @@ npm run dev_win [your-entry-name]
 # for linux/mac
 npm run dev [your-entry-name]
 ```
+
+
+### 脚手架 - react组件库
+
+创建项目
+```
+dudy -c react-component-library -n [your-library-name]
+
+cd [your-library-name]
+```
+
+
+创建项目后，目录结构如下
+
+
+├── example        // 组件库测试项目
+└── src            // 组件库源代码
+
+
+在example项目中引入组件
